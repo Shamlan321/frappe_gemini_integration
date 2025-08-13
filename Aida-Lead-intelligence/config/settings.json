@@ -1,0 +1,32 @@
+{
+  "company_info": {
+    "name": "",
+    "description": "",
+    "website": "",
+    "email": "",
+    "phone": "",
+    "address": "",
+    "contact_name": "",
+    "industry": "",
+    "value_proposition": ""
+  },
+  "erpnext": {
+    "url": "http://46.62.138.17:8000/",
+    "username": "Administrator",
+    "password": "admin",
+    "connected": false
+  },
+  "api_keys": {
+    "apify_token": "",
+    "google_api_key": "",
+    "apollo_api_key": ""
+  },
+  "lead_generation": {
+    "default_max_leads": 10,
+    "default_location": "New York, USA",
+    "default_language": "en",
+    "auto_sync_erpnext": true
+  },
+  "email_templates": [],
+  "last_updated": "2025-07-12T05:28:43.005903"
+}

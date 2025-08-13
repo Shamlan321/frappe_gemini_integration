@@ -1,0 +1,33 @@
+# Email Configuration Template
+# Copy this file to .env and fill in your email credentials
+
+# SMTP Server Configuration
+SMTP_SERVER=smtp.hostinger.com
+SMTP_PORT=587
+
+# Sender Email Configuration
+SENDER_EMAIL=support@mocxha.com
+SENDER_PASSWORD=@Mocxha123
+SENDER_NAME=Aida Lead Intelligence
+
+# Test Configuration
+TEST_RECIPIENT=shamlan.arshad321@gmail.com
+
+# Common SMTP Settings for Popular Providers:
+
+# Gmail
+# SMTP_SERVER=smtp.gmail.com
+# SMTP_PORT=587
+# Note: Use App Password if 2FA is enabled
+
+# Outlook/Hotmail
+# SMTP_SERVER=smtp-mail.outlook.com
+# SMTP_PORT=587
+
+# Yahoo
+# SMTP_SERVER=smtp.mail.yahoo.com
+# SMTP_PORT=587
+
+# Custom SMTP (like SendGrid, Mailgun, etc.)
+# SMTP_SERVER=your-smtp-server.com
+# SMTP_PORT=587 

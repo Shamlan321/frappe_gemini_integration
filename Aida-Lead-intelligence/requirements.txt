@@ -1,0 +1,47 @@
+# Flask and web framework dependencies
+flask>=2.3.0
+flask-cors>=4.0.0
+werkzeug>=2.3.0
+
+# Authentication and security
+bcrypt>=4.0.0
+cryptography>=41.0.0
+PyJWT>=2.8.0
+
+# Database (SQLite is built-in with Python)
+
+# HTTP requests and API clients
+requests>=2.31.0
+frappe-client>=0.1.0.dev0
+
+# AI and language processing
+langchain>=0.1.0
+langchain-google-genai>=1.0.0
+google-generativeai>=0.4.1
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# API integrations
+apify-client>=1.7.0
+
+# Environment and configuration
+python-dotenv>=1.0.0
+
+# JSON and data validation
+jsonschema>=4.19.0
+
+# Date and time handling
+python-dateutil>=2.8.0
+
+# Web scraping (if needed)
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Production server
+gunicorn>=21.0.0
+
+# Development and testing
+pytest>=7.4.0
+pytest-flask>=1.3.0
