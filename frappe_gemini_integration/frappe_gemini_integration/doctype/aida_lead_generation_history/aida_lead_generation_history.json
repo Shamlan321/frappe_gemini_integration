@@ -1,0 +1,116 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-27 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "generation_details",
+  "user_query",
+  "source",
+  "criteria",
+  "leads_generated",
+  "status",
+  "column_break_1",
+  "performance_metrics",
+  "success_rate",
+  "quality_score",
+  "processing_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "generation_details",
+   "fieldtype": "Section Break",
+   "label": "Generation Details",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "user_query",
+   "fieldtype": "Text",
+   "label": "User Query",
+   "reqd": 1,
+   "description": "The original user query for lead generation"
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "label": "Source",
+   "options": "gmaps\napollo\nmanual",
+   "reqd": 1
+  },
+  {
+   "fieldname": "criteria",
+   "fieldtype": "Code",
+   "label": "Criteria",
+   "description": "Extracted lead generation criteria in JSON format",
+   "read_only": 1
+  },
+  {
+   "fieldname": "leads_generated",
+   "fieldtype": "Int",
+   "label": "Leads Generated",
+   "reqd": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "In Progress\nCompleted\nFailed",
+   "default": "In Progress"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "performance_metrics",
+   "fieldtype": "Section Break",
+   "label": "Performance Metrics",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "success_rate",
+   "fieldtype": "Percent",
+   "label": "Success Rate",
+   "description": "Percentage of leads that were successfully generated",
+   "read_only": 1
+  },
+  {
+   "fieldname": "quality_score",
+   "fieldtype": "Float",
+   "label": "Quality Score",
+   "description": "Average quality score of generated leads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "processing_time",
+   "fieldtype": "Float",
+   "label": "Processing Time (seconds)",
+   "description": "Time taken to generate leads",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-27 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Aida Lead Intelligence",
+ "name": "Aida Lead Generation History",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

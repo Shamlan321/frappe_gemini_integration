@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-27 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "api_configuration",
+  "google_api_key",
+  "apify_token",
+  "apollo_api_key",
+  "column_break_1",
+  "erp_configuration",
+  "erp_url",
+  "erp_username",
+  "erp_password",
+  "erp_api_key",
+  "section_break_1",
+  "company_configuration",
+  "company_name",
+  "industry",
+  "website",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "api_configuration",
+   "fieldtype": "Section Break",
+   "label": "API Configuration",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "google_api_key",
+   "fieldtype": "Password",
+   "label": "Google API Key",
+   "description": "API key for Google Gemini AI services"
+  },
+  {
+   "fieldname": "apify_token",
+   "fieldtype": "Password",
+   "label": "Apify Token",
+   "description": "Token for Apify lead generation services"
+  },
+  {
+   "fieldname": "apollo_api_key",
+   "fieldtype": "Password",
+   "label": "Apollo API Key",
+   "description": "API key for Apollo.io lead generation"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "erp_configuration",
+   "fieldtype": "Section Break",
+   "label": "ERP Configuration",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "erp_url",
+   "fieldtype": "Data",
+   "label": "ERP URL",
+   "description": "Base URL of your ERPNext instance"
+  },
+  {
+   "fieldname": "erp_username",
+   "fieldtype": "Data",
+   "label": "ERP Username",
+   "description": "Username for ERP authentication"
+  },
+  {
+   "fieldname": "erp_password",
+   "fieldtype": "Password",
+   "label": "ERP Password",
+   "description": "Password for ERP authentication"
+  },
+  {
+   "fieldname": "erp_api_key",
+   "fieldtype": "Password",
+   "label": "ERP API Key",
+   "description": "Optional API key for ERP integration"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "company_configuration",
+   "fieldtype": "Section Break",
+   "label": "Company Configuration",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Company Name"
+  },
+  {
+   "fieldname": "industry",
+   "fieldtype": "Data",
+   "label": "Industry"
+  },
+  {
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-01-27 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Aida Lead Intelligence",
+ "name": "Aida Lead Intelligence Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,288 @@
+{
+ "actions": [
+  {
+   "action": "aida_lead_intelligence.api.score_lead",
+   "label": "Score Lead",
+   "name": "score_lead",
+   "type": "Action"
+  },
+  {
+   "action": "aida_lead_intelligence.api.sync_lead_to_erp",
+   "label": "Sync to ERP",
+   "name": "sync_to_erp",
+   "type": "Action"
+  }
+ ],
+ "allow_rename": 1,
+ "creation": "2025-01-27 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "lead_information",
+  "company_name",
+  "first_name",
+  "last_name",
+  "title",
+  "industry",
+  "company_size",
+  "column_break_1",
+  "contact_information",
+  "email",
+  "phone",
+  "website",
+  "linkedin_url",
+  "section_break_1",
+  "location_information",
+  "address",
+  "city",
+  "state",
+  "country",
+  "latitude",
+  "longitude",
+  "column_break_2",
+  "additional_details",
+  "rating",
+  "reviews_count",
+  "category",
+  "source",
+  "generated_at",
+  "section_break_2",
+  "scoring_information",
+  "lead_score",
+  "score",
+  "status",
+  "section_break_3",
+  "erp_integration",
+  "erp_lead_id",
+  "synced_to_erp",
+  "synced_at"
+ ],
+ "fields": [
+  {
+   "fieldname": "lead_information",
+   "fieldtype": "Section Break",
+   "label": "Lead Information",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Company Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "label": "First Name"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Job Title"
+  },
+  {
+   "fieldname": "industry",
+   "fieldtype": "Data",
+   "label": "Industry"
+  },
+  {
+   "fieldname": "company_size",
+   "fieldtype": "Data",
+   "label": "Company Size"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_information",
+   "fieldtype": "Section Break",
+   "label": "Contact Information",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website"
+  },
+  {
+   "fieldname": "linkedin_url",
+   "fieldtype": "Data",
+   "label": "LinkedIn URL"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "location_information",
+   "fieldtype": "Section Break",
+   "label": "Location Information",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Data",
+   "label": "Country"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "additional_details",
+   "fieldtype": "Section Break",
+   "label": "Additional Details",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Float",
+   "label": "Rating"
+  },
+  {
+   "fieldname": "reviews_count",
+   "fieldtype": "Int",
+   "label": "Reviews Count"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "label": "Category"
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "label": "Source",
+   "options": "google_maps\napollo\nmanual"
+  },
+  {
+   "fieldname": "generated_at",
+   "fieldtype": "Datetime",
+   "label": "Generated At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "scoring_information",
+   "fieldtype": "Section Break",
+   "label": "Scoring Information",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "lead_score",
+   "fieldtype": "Link",
+   "label": "Lead Score",
+   "options": "Aida Lead Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "score",
+   "fieldtype": "Int",
+   "label": "Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "COLD\nWARM\nHOT",
+   "default": "COLD"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "erp_integration",
+   "fieldtype": "Section Break",
+   "label": "ERP Integration",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "erp_lead_id",
+   "fieldtype": "Data",
+   "label": "ERP Lead ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "synced_to_erp",
+   "fieldtype": "Check",
+   "label": "Synced to ERP",
+   "read_only": 1
+  },
+  {
+   "fieldname": "synced_at",
+   "fieldtype": "Datetime",
+   "label": "Synced At",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-27 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Aida Lead Intelligence",
+ "name": "Aida Generated Lead",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

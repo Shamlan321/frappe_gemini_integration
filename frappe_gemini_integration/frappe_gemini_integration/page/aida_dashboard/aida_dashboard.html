@@ -1,0 +1,865 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Aida Lead Intelligence Dashboard") }}{% endblock %}
+
+{% block page_content %}
+<div class="aida-dashboard">
+    <!-- Header Section -->
+    <div class="dashboard-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="dashboard-title">
+                        <i class="fa fa-chart-line text-primary me-3"></i>
+                        {{ _("Aida Lead Intelligence Dashboard") }}
+                    </h1>
+                    <p class="dashboard-subtitle text-muted">
+                        {{ _("AI-Powered Lead Generation and Intelligence Platform") }}
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-primary btn-lg" onclick="openLeadGenerationModal()">
+                        <i class="fa fa-plus me-2"></i>
+                        {{ _("Generate Leads") }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="total-leads">-</h3>
+                            <p class="stat-label">{{ _("Total Leads") }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="scored-leads">-</h3>
+                            <p class="stat-label">{{ _("Scored Leads") }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info">
+                            <i class="fa fa-sync"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="synced-leads">-</h3>
+                            <p class="stat-label">{{ _("Synced to ERP") }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="fa fa-chart-bar"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="avg-score">-</h3>
+                            <p class="stat-label">{{ _("Avg Score") }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-card">
+                        <h5 class="chart-title">{{ _("Leads by Status") }}</h5>
+                        <canvas id="status-chart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-card">
+                        <h5 class="chart-title">{{ _("Leads by Source") }}</h5>
+                        <canvas id="source-chart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Leads Section -->
+    <div class="recent-leads-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">{{ _("Recent Leads") }}</h5>
+                            <div class="card-actions">
+                                <button class="btn btn-outline-primary btn-sm" onclick="refreshLeads()">
+                                    <i class="fa fa-refresh me-1"></i>
+                                    {{ _("Refresh") }}
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="batchScoreLeads()">
+                                    <i class="fa fa-star me-1"></i>
+                                    {{ _("Batch Score") }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="leads-table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <input type="checkbox" id="select-all-leads" onchange="toggleSelectAll()">
+                                            </th>
+                                            <th>{{ _("Company") }}</th>
+                                            <th>{{ _("Contact") }}</th>
+                                            <th>{{ _("Industry") }}</th>
+                                            <th>{{ _("Location") }}</th>
+                                            <th>{{ _("Score") }}</th>
+                                            <th>{{ _("Status") }}</th>
+                                            <th>{{ _("Actions") }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="leads-table-body">
+                                        <!-- Leads will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lead Generation Modal -->
+<div class="modal fade" id="leadGenerationModal" tabindex="-1" aria-labelledby="leadGenerationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="leadGenerationModalLabel">{{ _("Generate New Leads") }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="lead-generation-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="user-query" class="form-label">{{ _("Describe what you're looking for") }}</label>
+                                <textarea class="form-control" id="user-query" rows="3" 
+                                    placeholder="{{ _('e.g., Find 20 tech companies in San Francisco with email addresses') }}"></textarea>
+                                <small class="form-text text-muted">
+                                    {{ _("Use natural language to describe your lead requirements") }}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="lead-source" class="form-label">{{ _("Lead Source") }}</label>
+                                <select class="form-select" id="lead-source">
+                                    <option value="gmaps">{{ _("Google Maps") }}</option>
+                                    <option value="apollo">{{ _("Apollo") }}</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="max-leads" class="form-label">{{ _("Maximum Leads") }}</label>
+                                <input type="number" class="form-control" id="max-leads" value="10" min="1" max="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="advanced-criteria" class="form-label">{{ _("Advanced Criteria") }}</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="require-email">
+                                            <label class="form-check-label" for="require-email">
+                                                {{ _("Require Email") }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="require-phone">
+                                            <label class="form-check-label" for="require-phone">
+                                                {{ _("Require Phone") }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="skip-closed">
+                                            <label class="form-check-label" for="skip-closed">
+                                                {{ _("Skip Closed") }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ _("Cancel") }}</button>
+                <button type="button" class="btn btn-primary" onclick="generateLeads()">
+                    <i class="fa fa-magic me-2"></i>
+                    {{ _("Generate Leads") }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Spinner -->
+<div id="loading-spinner" class="loading-overlay" style="display: none;">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">{{ _("Loading...") }}</span>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block style %}
+<style>
+.aida-dashboard {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.dashboard-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.dashboard-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+.stats-section {
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.stat-content h3 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.stat-label {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.charts-section {
+    margin-bottom: 2rem;
+}
+
+.chart-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+
+.chart-title {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.recent-leads-section {
+    margin-bottom: 2rem;
+}
+
+.content-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 1.5rem;
+    border-radius: 12px 12px 0 0;
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.card-actions .btn {
+    margin-left: 0.5rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-hot {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-warm {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-cold {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-1px);
+}
+
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+@media (max-width: 768px) {
+    .dashboard-title {
+        font-size: 2rem;
+    }
+    
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+    
+    .card-actions {
+        margin-top: 1rem;
+    }
+    
+    .card-actions .btn {
+        margin-left: 0;
+        margin-bottom: 0.5rem;
+        display: block;
+        width: 100%;
+    }
+}
+</style>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+let leadsData = [];
+let statusChart = null;
+let sourceChart = null;
+
+// Initialize dashboard
+document.addEventListener('DOMContentLoaded', function() {
+    loadDashboardStats();
+    loadRecentLeads();
+    initializeCharts();
+});
+
+// Load dashboard statistics
+async function loadDashboardStats() {
+    try {
+        showLoading();
+        const response = await fetch('/api/method/aida_lead_intelligence.api.get_dashboard_stats');
+        const data = await response.json();
+        
+        if (data.success) {
+            updateStatistics(data.stats);
+        }
+    } catch (error) {
+        console.error('Error loading dashboard stats:', error);
+        frappe.show_alert('Error loading dashboard statistics', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Update statistics display
+function updateStatistics(stats) {
+    document.getElementById('total-leads').textContent = stats.lead_generation?.total_leads || 0;
+    document.getElementById('scored-leads').textContent = stats.lead_scoring?.scored_leads || 0;
+    document.getElementById('synced-leads').textContent = stats.erp_integration?.synced_leads || 0;
+    
+    const avgScore = stats.lead_scoring?.quality_score || 0;
+    document.getElementById('avg-score').textContent = Math.round(avgScore);
+    
+    updateCharts(stats);
+}
+
+// Load recent leads
+async function loadRecentLeads() {
+    try {
+        showLoading();
+        const response = await fetch('/api/method/aida_lead_intelligence.api.get_leads?page_length=20');
+        const data = await response.json();
+        
+        if (data.success) {
+            leadsData = data.leads;
+            displayLeads(leadsData);
+        }
+    } catch (error) {
+        console.error('Error loading leads:', error);
+        frappe.show_alert('Error loading leads', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Display leads in table
+function displayLeads(leads) {
+    const tbody = document.getElementById('leads-table-body');
+    tbody.innerHTML = '';
+    
+    leads.forEach(lead => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <input type="checkbox" class="lead-checkbox" value="${lead.name}">
+            </td>
+            <td>
+                <strong>${lead.company_name || 'N/A'}</strong>
+                ${lead.industry ? `<br><small class="text-muted">${lead.industry}</small>` : ''}
+            </td>
+            <td>
+                ${lead.first_name || ''} ${lead.last_name || ''}<br>
+                ${lead.email ? `<small class="text-muted">${lead.email}</small>` : ''}
+            </td>
+            <td>${lead.industry || 'N/A'}</td>
+            <td>
+                ${lead.city || ''}${lead.city && lead.state ? ', ' : ''}${lead.state || ''}<br>
+                <small class="text-muted">${lead.country || ''}</small>
+            </td>
+            <td>
+                ${lead.score ? `<span class="badge bg-primary">${lead.score}/100</span>` : '<span class="text-muted">Not scored</span>'}
+            </td>
+            <td>
+                ${lead.status ? `<span class="status-badge status-${lead.status.toLowerCase()}">${lead.status}</span>` : '<span class="text-muted">-</span>'}
+            </td>
+            <td>
+                <div class="btn-group btn-group-sm">
+                    ${!lead.lead_score ? `<button class="btn btn-outline-primary" onclick="scoreLead('${lead.name}')" title="Score Lead">
+                        <i class="fa fa-star"></i>
+                    </button>` : ''}
+                    ${!lead.synced_to_erp ? `<button class="btn btn-outline-success" onclick="syncToERP('${lead.name}')" title="Sync to ERP">
+                        <i class="fa fa-sync"></i>
+                    </button>` : ''}
+                    <button class="btn btn-outline-danger" onclick="deleteLead('${lead.name}')" title="Delete Lead">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Initialize charts
+function initializeCharts() {
+    // Status chart
+    const statusCtx = document.getElementById('status-chart').getContext('2d');
+    statusChart = new Chart(statusCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['HOT', 'WARM', 'COLD'],
+            datasets: [{
+                data: [0, 0, 0],
+                backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+    
+    // Source chart
+    const sourceCtx = document.getElementById('source-chart').getContext('2d');
+    sourceChart = new Chart(sourceCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Google Maps', 'Apollo', 'Manual'],
+            datasets: [{
+                label: 'Leads',
+                data: [0, 0, 0],
+                backgroundColor: ['#007bff', '#6f42c1', '#6c757d']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+// Update charts with data
+function updateCharts(stats) {
+    if (statusChart && stats.leads_by_status) {
+        statusChart.data.datasets[0].data = [
+            stats.leads_by_status.HOT || 0,
+            stats.leads_by_status.WARM || 0,
+            stats.leads_by_status.COLD || 0
+        ];
+        statusChart.update();
+    }
+    
+    if (sourceChart && stats.leads_by_source) {
+        sourceChart.data.datasets[0].data = [
+            stats.leads_by_source.google_maps || 0,
+            stats.leads_by_source.apollo || 0,
+            stats.leads_by_source.manual || 0
+        ];
+        sourceChart.update();
+    }
+}
+
+// Open lead generation modal
+function openLeadGenerationModal() {
+    const modal = new bootstrap.Modal(document.getElementById('leadGenerationModal'));
+    modal.show();
+}
+
+// Generate leads
+async function generateLeads() {
+    const userQuery = document.getElementById('user-query').value;
+    const source = document.getElementById('lead-source').value;
+    const maxLeads = document.getElementById('max-leads').value;
+    const requireEmail = document.getElementById('require-email').checked;
+    const requirePhone = document.getElementById('require-phone').checked;
+    const skipClosed = document.getElementById('skip-closed').checked;
+    
+    if (!userQuery.trim()) {
+        frappe.show_alert('Please enter a description of what you\'re looking for', 'error');
+        return;
+    }
+    
+    try {
+        showLoading();
+        
+        const response = await fetch('/api/method/aida_lead_intelligence.api.generate_leads', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_query: userQuery,
+                source: source,
+                max_leads: parseInt(maxLeads),
+                require_email: requireEmail,
+                require_phone: requirePhone,
+                skip_closed: skipClosed
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            frappe.show_alert(`Successfully generated ${data.leads.length} leads!`, 'success');
+            
+            // Close modal and refresh data
+            const modal = bootstrap.Modal.getInstance(document.getElementById('leadGenerationModal'));
+            modal.hide();
+            
+            // Reset form
+            document.getElementById('lead-generation-form').reset();
+            
+            // Refresh dashboard
+            loadDashboardStats();
+            loadRecentLeads();
+        } else {
+            frappe.show_alert(data.error || 'Failed to generate leads', 'error');
+        }
+    } catch (error) {
+        console.error('Error generating leads:', error);
+        frappe.show_alert('Error generating leads', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Score a single lead
+async function scoreLead(leadId) {
+    try {
+        showLoading();
+        
+        const response = await fetch('/api/method/aida_lead_intelligence.api.score_lead', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                lead_id: leadId
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            frappe.show_alert('Lead scored successfully!', 'success');
+            loadDashboardStats();
+            loadRecentLeads();
+        } else {
+            frappe.show_alert(data.error || 'Failed to score lead', 'error');
+        }
+    } catch (error) {
+        console.error('Error scoring lead:', error);
+        frappe.show_alert('Error scoring lead', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Batch score leads
+async function batchScoreLeads() {
+    const selectedLeads = Array.from(document.querySelectorAll('.lead-checkbox:checked')).map(cb => cb.value);
+    
+    if (selectedLeads.length === 0) {
+        frappe.show_alert('Please select leads to score', 'error');
+        return;
+    }
+    
+    try {
+        showLoading();
+        
+        const response = await fetch('/api/method/aida_lead_intelligence.api.batch_score_leads', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                lead_ids: selectedLeads
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            frappe.show_alert(`Successfully scored ${selectedLeads.length} leads!`, 'success');
+            loadDashboardStats();
+            loadRecentLeads();
+        } else {
+            frappe.show_alert(data.error || 'Failed to batch score leads', 'error');
+        }
+    } catch (error) {
+        console.error('Error batch scoring leads:', error);
+        frappe.show_alert('Error batch scoring leads', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Sync lead to ERP
+async function syncToERP(leadId) {
+    try {
+        showLoading();
+        
+        const response = await fetch('/api/method/aida_lead_intelligence.api.sync_lead_to_erp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                lead_id: leadId
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            frappe.show_alert('Lead synced to ERP successfully!', 'success');
+            loadDashboardStats();
+            loadRecentLeads();
+        } else {
+            frappe.show_alert(data.error || 'Failed to sync lead to ERP', 'error');
+        }
+    } catch (error) {
+        console.error('Error syncing lead to ERP:', error);
+        frappe.show_alert('Error syncing lead to ERP', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Delete lead
+async function deleteLead(leadId) {
+    if (!confirm('Are you sure you want to delete this lead?')) {
+        return;
+    }
+    
+    try {
+        showLoading();
+        
+        const response = await fetch('/api/method/aida_lead_intelligence.api.delete_lead', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                lead_id: leadId
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            frappe.show_alert('Lead deleted successfully!', 'success');
+            loadDashboardStats();
+            loadRecentLeads();
+        } else {
+            frappe.show_alert(data.error || 'Failed to delete lead', 'error');
+        }
+    } catch (error) {
+        console.error('Error deleting lead:', error);
+        frappe.show_alert('Error deleting lead', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Refresh leads
+function refreshLeads() {
+    loadRecentLeads();
+}
+
+// Toggle select all leads
+function toggleSelectAll() {
+    const selectAll = document.getElementById('select-all-leads');
+    const checkboxes = document.querySelectorAll('.lead-checkbox');
+    
+    checkboxes.forEach(cb => {
+        cb.checked = selectAll.checked;
+    });
+}
+
+// Show loading spinner
+function showLoading() {
+    document.getElementById('loading-spinner').style.display = 'flex';
+}
+
+// Hide loading spinner
+function hideLoading() {
+    document.getElementById('loading-spinner').style.display = 'none';
+}
+</script>
+{% endblock %}
