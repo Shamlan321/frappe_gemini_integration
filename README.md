@@ -1,56 +1,86 @@
-# 🧠 OpenAI Integration for Frappe
+# Frappe Gemini Integration
 
-A powerful custom Frappe app that integrates OpenAI’s models (like ChatGPT) into your ERP system. This tool enables users to interact with OpenAI APIs directly from the Frappe interface, submit prompts, and view generated responses with a seamless, user-friendly UI.
+A Frappe Framework application that integrates Google's Gemini AI models for intelligent chat assistance.
 
----
+## Features
 
-## 🌟 Features
+- **Gemini AI Integration**: Connect to Google's Gemini models (gemini-1.5-flash, gemini-1.5-pro, etc.)
+- **Chat Interface**: Built-in chatbot interface for interacting with Gemini AI
+- **Chat History**: Persistent storage of conversations
+- **User Management**: Individual chat histories for each user
+- **Easy Configuration**: Simple setup through Frappe Desk
 
-- ✍️ Prompt Submission Interface (Chat-style)
-- 📬 View AI-generated responses in real-time
-- 🧾 Prompt history tracking
-- ⚙️ OpenAI API Key Configuration
-- 📊 Dashboard showing prompt stats (total prompts, settings, etc.)
-- 🔐 Role-based access control for using AI features
-- 💬 Multi-message threads or single prompts
+## Installation
 
----
+1. **Install the app**:
+   ```bash
+   bench get-app frappe_gemini_integration
+   bench install-app frappe_gemini_integration
+   ```
 
-## 🖼️ UI Screenshots
+2. **Install Python dependencies**:
+   ```bash
+   bench pip install google-generativeai
+   ```
 
-1. **Prompt Input Interface**
-![chat_assistant](.github/chat_assistant.png)
-   - Input your question to OpenAI
-   - Get immediate response via API
-   - Save history for reference
+3. **Configure Gemini API**:
+   - Go to **Frappe Desk > Gemini Integration Settings**
+   - Enter your Google Gemini API key
+   - Select your preferred model
 
-2. **Prompt History Listing**
-![prompt_log](.github/prompt_log.png)
-   - View all past queries and responses
-   - Filter by user/date/type
+## Usage
 
-3. **OpenAI Settings**
-![settings](.github/settings.png)
-   - Configure API keys
-   - Toggle model options (e.g., `gpt-3.5`, `gpt-4`)
+1. **Access the Chatbot**:
+   - Navigate to **Frappe Desk > Frappe ChatBot**
+   - Start chatting with Gemini AI
 
-4. **Dashboard**
-![dashboard](.github/dashboard.png)
-   - Shows:
-     - OpenAI Settings
-     - Total prompts
-     - Chat Assistant
+2. **API Usage**:
+   ```python
+   from frappe_gemini_integration.api import ask_gemini
+   
+   response = ask_gemini("What is artificial intelligence?")
+   print(response)
+   ```
 
----
+## Configuration
 
-## 🛠️ Installation
+### API Key
+Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
 
-Make sure you have Frappe set up.
+### Available Models
+- `gemini-1.5-flash` - Fast and efficient
+- `gemini-1.5-pro` - More capable model
+- `gemini-1.0-pro` - Standard model
+- `gemini-1.0-pro-vision` - Vision-enabled model
 
-```bash
-# Get the app
-$ bench get-app https://github.com/manavmandli/frappe_openai_integration.git
+## Development
 
-# Install on your site
-$ bench --site yoursite install-app frappe_openai_integration
+### Structure
+```
+frappe_gemini_integration/
+├── api.py                    # Main API functions
+├── hooks.py                  # Frappe hooks
+├── frappe_gemini_integration/
+│   ├── doctype/
+│   │   ├── gemini_integration_settings/  # Settings configuration
+│   │   └── gemini_prompt_log/            # Chat history storage
+│   └── page/
+│       └── frappe_chatbot/               # Chat interface
+└── public/
+    └── css/
+        └── chatbot.css                   # Chat interface styling
+```
+
+### Adding New Features
+1. Extend the API functions in `api.py`
+2. Update the frontend in the chatbot page
+3. Modify doctypes as needed
+
+## License
+
+MIT License - see [license.txt](license.txt) for details.
+
+## Support
+
+For issues and questions, please contact: manavmandli2990@gmail.com
 

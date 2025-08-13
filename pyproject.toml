@@ -1,13 +1,14 @@
 [project]
-name = "frappe_openai_integration"
+name = "frappe_gemini_integration"
 authors = [
     { name = "Manav Mandli", email = "manavmandli2990@gmail.com"}
 ]
-description = "OpenAI Integration in Frappe Framework"
+description = "Gemini Integration in Frappe Framework"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
 dependencies = [
+    "google-generativeai>=0.3.0",
     # "frappe~=15.0.0" # Installed and managed by bench.
 ]
 

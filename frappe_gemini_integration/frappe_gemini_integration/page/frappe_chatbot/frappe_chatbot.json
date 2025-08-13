@@ -6,7 +6,7 @@
  "idx": 0,
  "modified": "2025-05-25 12:30:04.516020",
  "modified_by": "Administrator",
- "module": "Frappe Openai Integration",
+ "module": "Frappe Gemini Integration",
  "name": "frappe-chatbot",
  "owner": "Administrator",
  "page_name": "frappe-chatbot",

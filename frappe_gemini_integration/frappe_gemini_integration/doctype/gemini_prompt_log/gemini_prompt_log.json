@@ -59,8 +59,8 @@
  "links": [],
  "modified": "2025-05-25 15:20:28.325516",
  "modified_by": "Administrator",
- "module": "Frappe Openai Integration",
- "name": "OpenAI Prompt Log",
+ "module": "Frappe Gemini Integration",
+ "name": "Gemini Prompt Log",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
