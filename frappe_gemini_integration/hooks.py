@@ -1,7 +1,7 @@
-app_name = "frappe_openai_integration"
-app_title = "Frappe Openai Integration"
+app_name = "frappe_gemini_integration"
+app_title = "Frappe Gemini Integration"
 app_publisher = "Manav Mandli"
-app_description = "OpenAI Integration in Frappe Framework"
+app_description = "Gemini Integration in Frappe Framework"
 app_email = "manavmandli2990@gmail.com"
 app_license = "mit"
 
@@ -23,7 +23,7 @@ app_license = "mit"
 
 # Includes in <head>
 # ------------------
-app_include_css = "/assets/frappe_openai_integration/css/chatbot.css"
+app_include_css = "/assets/frappe_gemini_integration/css/chatbot.css"
 
 
 # include js, css files in header of desk.html

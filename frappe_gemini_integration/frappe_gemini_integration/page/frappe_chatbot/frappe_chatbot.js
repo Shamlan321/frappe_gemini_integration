@@ -5,7 +5,7 @@ frappe.pages['frappe-chatbot'].on_page_load = function(wrapper) {
 		single_column: true
 	});
 
-	frappe.require('/assets/frappe_openai_integration/css/chatbot.css');
+	frappe.require('/assets/frappe_gemini_integration/css/chatbot.css');
 
 	// Add full-width classes
 	let chat_area = $('<div>', { id: 'chat-area', class: 'chat-area' }).appendTo(page.main);
@@ -32,7 +32,7 @@ frappe.pages['frappe-chatbot'].on_page_load = function(wrapper) {
 
 	function load_chat_history() {
 		frappe.call({
-			method: "frappe_openai_integration.api.get_chat_history",
+			method: "frappe_gemini_integration.api.get_chat_history",
 			callback: function(r) {
 				if (r.message) {
 					chat_area.empty();
@@ -76,7 +76,7 @@ frappe.pages['frappe-chatbot'].on_page_load = function(wrapper) {
 		chat_area.scrollTop(chat_area[0].scrollHeight);
 
 		frappe.call({
-			method: "frappe_openai_integration.api.ask_openai",
+			method: "frappe_gemini_integration.api.ask_gemini",
 			args: { prompt: val },
 			callback: function(r) {
 				typing.remove();
@@ -90,7 +90,7 @@ frappe.pages['frappe-chatbot'].on_page_load = function(wrapper) {
 
 	function save_chat(prompt, response) {
 		frappe.call({
-			method: "frappe_openai_integration.api.save_chat_message",
+			method: "frappe_gemini_integration.api.save_chat_message",
 			args: { prompt, response }
 		});
 	}
@@ -98,7 +98,7 @@ frappe.pages['frappe-chatbot'].on_page_load = function(wrapper) {
 	clear_btn.on('click', function () {
 		frappe.confirm('Are you sure you want to clear the chat history?', () => {
 		frappe.call({
-			method: "frappe_openai_integration.api.clear_chat_history",
+			method: "frappe_gemini_integration.api.clear_chat_history",
 			callback: function (r) {
 			if (r.message === "success") {
 				chat_area.empty();

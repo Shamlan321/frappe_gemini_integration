@@ -19,7 +19,7 @@
    "fieldname": "model",
    "fieldtype": "Select",
    "label": "Model",
-   "options": "Auto\ngpt-4o-mini\ngpt-4-turbo\ngpt-4\ngpt-3.5-turbo\ngpt-3.5-turbo-16k"
+   "options": "Auto\ngemini-1.5-flash\ngemini-1.5-pro\ngemini-1.0-pro\ngemini-1.0-pro-vision"
   },
   {
    "fieldname": "column_break_epbc",
@@ -31,8 +31,8 @@
  "links": [],
  "modified": "2025-05-26 22:45:17.424289",
  "modified_by": "Administrator",
- "module": "Frappe Openai Integration",
- "name": "OpenAI Integration Settings",
+ "module": "Frappe Gemini Integration",
+ "name": "Gemini Integration Settings",
  "owner": "Administrator",
  "permissions": [
   {
