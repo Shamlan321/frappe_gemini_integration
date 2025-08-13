@@ -1,1 +1,2 @@
-__version__ = "0.0.1"
+# Aida Lead Intelligence
+# AI-Powered Lead Generation and Intelligence Platform for ERPNext

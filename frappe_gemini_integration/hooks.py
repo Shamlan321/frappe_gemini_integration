@@ -1,7 +1,7 @@
-app_name = "frappe_gemini_integration"
-app_title = "Frappe Gemini Integration"
+app_name = "aida_lead_intelligence"
+app_title = "Aida Lead Intelligence"
 app_publisher = "Manav Mandli"
-app_description = "Gemini Integration in Frappe Framework"
+app_description = "AI-Powered Lead Generation and Intelligence Platform for ERPNext"
 app_email = "manavmandli2990@gmail.com"
 app_license = "mit"
 
@@ -13,47 +13,46 @@ app_license = "mit"
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
-# 		"name": "frappe_openai_integration",
-# 		"logo": "/assets/frappe_openai_integration/logo.png",
-# 		"title": "Frappe Openai Integration",
-# 		"route": "/frappe_openai_integration",
-# 		"has_permission": "frappe_openai_integration.api.permission.has_app_permission"
+# 		"name": "aida_lead_intelligence",
+# 		"logo": "/assets/aida_lead_intelligence/logo.png",
+# 		"title": "Aida Lead Intelligence",
+# 		"route": "/aida_lead_intelligence",
+# 		"has_permission": "aida_lead_intelligence.api.permission.has_app_permission"
 # 	}
 # ]
 
 # Includes in <head>
 # ------------------
-app_include_css = "/assets/frappe_gemini_integration/css/chatbot.css"
-
+app_include_css = "/assets/aida_lead_intelligence/css/aida_lead_intelligence.css"
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/frappe_openai_integration/css/frappe_openai_integration.css"
-# app_include_js = "/assets/frappe_openai_integration/js/frappe_openai_integration.js"
+app_include_css = "/assets/aida_lead_intelligence/css/aida_lead_intelligence.css"
+app_include_js = "/assets/aida_lead_intelligence/js/aida_lead_intelligence.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/frappe_openai_integration/css/frappe_openai_integration.css"
-# web_include_js = "/assets/frappe_openai_integration/js/frappe_openai_integration.js"
+web_include_css = "/assets/aida_lead_intelligence/css/aida_lead_intelligence.css"
+web_include_js = "/assets/aida_lead_intelligence/js/aida_lead_intelligence.js"
 
 # include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "frappe_openai_integration/public/scss/website"
+website_theme_scss = "aida_lead_intelligence/public/scss/website"
 
 # include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
-# webform_include_css = {"doctype": "public/css/doctype.css"}
+webform_include_js = {"doctype": "public/js/doctype.js"}
+webform_include_css = {"doctype": "public/css/doctype.css"}
 
 # include js in page
-# page_js = {"page" : "public/js/file.js"}
+page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
+doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
 # Svg Icons
 # ------------------
 # include app icons in desk
-# app_include_icons = "frappe_openai_integration/public/icons.svg"
+app_include_icons = "aida_lead_intelligence/public/icons.svg"
 
 # Home Pages
 # ----------
@@ -77,43 +76,43 @@ app_include_css = "/assets/frappe_gemini_integration/css/chatbot.css"
 
 # add methods and filters to jinja environment
 # jinja = {
-# 	"methods": "frappe_openai_integration.utils.jinja_methods",
-# 	"filters": "frappe_openai_integration.utils.jinja_filters"
+# 	"methods": "aida_lead_intelligence.utils.jinja_methods",
+# 	"filters": "aida_lead_intelligence.utils.jinja_filters"
 # }
 
 # Installation
 # ------------
 
-# before_install = "frappe_openai_integration.install.before_install"
-# after_install = "frappe_openai_integration.install.after_install"
+# before_install = "aida_lead_intelligence.install.before_install"
+# after_install = "aida_lead_intelligence.install.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "frappe_openai_integration.uninstall.before_uninstall"
-# after_uninstall = "frappe_openai_integration.uninstall.after_uninstall"
+# before_uninstall = "aida_lead_intelligence.uninstall.before_uninstall"
+# after_uninstall = "aida_lead_intelligence.uninstall.after_uninstall"
 
 # Integration Setup
 # ------------------
 # To set up dependencies/integrations with other apps
 # Name of the app being installed is passed as an argument
 
-# before_app_install = "frappe_openai_integration.utils.before_app_install"
-# after_app_install = "frappe_openai_integration.utils.after_app_install"
+# before_app_install = "aida_lead_intelligence.utils.before_app_install"
+# after_app_install = "aida_lead_intelligence.utils.after_app_install"
 
 # Integration Cleanup
 # -------------------
 # To clean up dependencies/integrations with other apps
 # Name of the app being uninstalled is passed as an argument
 
-# before_app_uninstall = "frappe_openai_integration.utils.before_app_uninstall"
-# after_app_uninstall = "frappe_openai_integration.utils.after_app_uninstall"
+# before_app_uninstall = "aida_lead_intelligence.utils.before_app_uninstall"
+# after_app_uninstall = "aida_lead_intelligence.utils.after_app_uninstall"
 
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "frappe_openai_integration.notifications.get_notification_config"
+# notification_config = "aida_lead_intelligence.notifications.get_notification_config"
 
 # Permissions
 # -----------
@@ -150,41 +149,32 @@ app_include_css = "/assets/frappe_gemini_integration/css/chatbot.css"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"frappe_openai_integration.tasks.all"
-# 	],
-# 	"daily": [
-# 		"frappe_openai_integration.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"frappe_openai_integration.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"frappe_openai_integration.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"frappe_openai_integration.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"daily": [
+		"aida_lead_intelligence.tasks.daily_lead_scoring"
+	],
+	"hourly": [
+		"aida_lead_intelligence.tasks.hourly_lead_generation"
+	]
+}
 
 # Testing
 # -------
 
-# before_tests = "frappe_openai_integration.install.before_tests"
+# before_tests = "aida_lead_intelligence.install.before_tests"
 
 # Overriding Methods
 # ------------------------------
 #
 # override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "frappe_openai_integration.event.get_events"
+# 	"frappe.desk.doctype.event.event.get_events": "aida_lead_intelligence.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-# 	"Task": "frappe_openai_integration.task.get_dashboard_data"
+# 	"Task": "aida_lead_intelligence.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -198,13 +188,13 @@ app_include_css = "/assets/frappe_gemini_integration/css/chatbot.css"
 
 # Request Events
 # ----------------
-# before_request = ["frappe_openai_integration.utils.before_request"]
-# after_request = ["frappe_openai_integration.utils.after_request"]
+# before_request = ["aida_lead_intelligence.utils.before_request"]
+# after_request = ["aida_lead_intelligence.utils.after_request"]
 
 # Job Events
 # ----------
-# before_job = ["frappe_openai_integration.utils.before_job"]
-# after_job = ["frappe_openai_integration.utils.after_job"]
+# before_job = ["aida_lead_intelligence.utils.before_job"]
+# after_job = ["aida_lead_intelligence.utils.after_job"]
 
 # User Data Protection
 # --------------------
@@ -234,7 +224,7 @@ app_include_css = "/assets/frappe_gemini_integration/css/chatbot.css"
 # --------------------------------
 
 # auth_hooks = [
-# 	"frappe_openai_integration.auth.validate"
+# 	"aida_lead_intelligence.auth.validate"
 # ]
 
 # Automatically update python controller files with type annotations for this app.

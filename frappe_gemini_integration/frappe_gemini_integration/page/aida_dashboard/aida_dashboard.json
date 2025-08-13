@@ -1,0 +1,91 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-27 10:00:00.000000",
+ "doctype": "Page",
+ "engine": "InnoDB",
+ "field_order": [
+  "dashboard_title",
+  "dashboard_description",
+  "dashboard_type",
+  "is_standard",
+  "module",
+  "standard",
+  "custom_css",
+  "custom_js"
+ ],
+ "fields": [
+  {
+   "fieldname": "dashboard_title",
+   "fieldtype": "Data",
+   "label": "Dashboard Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dashboard_description",
+   "fieldtype": "Text",
+   "label": "Dashboard Description"
+  },
+  {
+   "fieldname": "dashboard_type",
+   "fieldtype": "Select",
+   "label": "Dashboard Type",
+   "options": "Dashboard\nPage",
+   "reqd": 1
+  },
+  {
+   "fieldname": "is_standard",
+   "fieldtype": "Check",
+   "label": "Is Standard"
+  },
+  {
+   "fieldname": "module",
+   "fieldtype": "Link",
+   "label": "Module",
+   "options": "Module Def",
+   "reqd": 1
+  },
+  {
+   "fieldname": "standard",
+   "fieldtype": "Link",
+   "label": "Standard",
+   "options": "Standard"
+  },
+  {
+   "fieldname": "custom_css",
+   "fieldtype": "Code",
+   "label": "Custom CSS",
+   "options": "CSS"
+  },
+  {
+   "fieldname": "custom_js",
+   "fieldtype": "Code",
+   "label": "Custom JS",
+   "options": "JavaScript"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-27 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Aida Lead Intelligence",
+ "name": "Aida Dashboard",
+ "owner": "Administrator",
+ "page_name": "aida-dashboard",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title": "Aida Lead Intelligence Dashboard"
+}
